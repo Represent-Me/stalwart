@@ -1,65 +1,49 @@
-# Stalwart Mail Server - Fly.io Configuration
-app = "stalwart-ec0yva"
-primary_region = "sjc"
+app = 'stalwart-ec0yva'
+primary_region = 'bom'
 
 [build]
   dockerfile = "Dockerfile.fly"
 
-[mounts]
-  source = "stalwart_data"
-  destination = "/opt/stalwart-mail"
+[[mounts]]
+  source = 'stalwart'
+  destination = '/opt/stalwart-mail'
 
-# JMAP/HTTPS (Port 443)
-[[services]]
-  internal_port = 443
-  protocol = "tcp"
-  auto_stop_machines = false
-  auto_start_machines = true
-  min_machines_running = 1
-
-  [[services.ports]]
-    port = 443
-
-# HTTP for ACME challenges (Port 80 -> 8080)
-[[services]]
-  internal_port = 8080
-  protocol = "tcp"
-
-  [[services.ports]]
-    port = 80
-
-# SMTP Inbound (Port 25)
+# SMTP inbound
 [[services]]
   internal_port = 25
   protocol = "tcp"
-
   [[services.ports]]
     port = 25
 
-# SMTP Submission (Port 587)
+# SMTP submission
 [[services]]
   internal_port = 587
   protocol = "tcp"
-
   [[services.ports]]
     port = 587
 
-# SMTPS (Port 465)
-[[services]]
-  internal_port = 465
-  protocol = "tcp"
-
-  [[services.ports]]
-    port = 465
-
-# IMAPS (Port 993)
+# IMAPS
 [[services]]
   internal_port = 993
   protocol = "tcp"
-
   [[services.ports]]
     port = 993
 
-[vm]
-  size = "shared-cpu-2x"
-  memory = "1gb"
+# HTTPS/JMAP
+[[services]]
+  internal_port = 443
+  protocol = "tcp"
+  [[services.ports]]
+    port = 443
+
+# HTTP (for ACME/Let's Encrypt)
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+  [[services.ports]]
+    port = 80
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

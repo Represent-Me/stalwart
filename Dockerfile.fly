@@ -1,13 +1,2 @@
-# Stalwart Mail Server - Fly.io Deployment
-# Uses official pre-built image for fast deployments
-
+# Use official pre-built Stalwart image
 FROM stalwartlabs/stalwart:latest
-
-# Default ports exposed by Stalwart:
-# 443  - HTTPS/JMAP
-# 25   - SMTP
-# 587  - SMTP Submission
-# 465  - SMTPS
-# 143  - IMAP
-# 993  - IMAPS
-# 8080 - HTTP/Management
